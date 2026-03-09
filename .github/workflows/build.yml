@@ -57,11 +57,9 @@ jobs:
         rm balenaEtcher-linux-x64-$version.zip
         mv balenaEtcher-linux-x64/ bin/
 
-        pwd
-        ls -lah
+        pwd; ls -lah
         cd ../../
-        pwd
-        ls -lah
+        pwd; ls -lah
 
         wget https://github.com/balena-io/etcher/blob/master/assets/iconset/128x128.png -O balenaEtcher.AppDir/balenaEtcher.png
         cp README.md balenaEtcher.AppDir
@@ -72,12 +70,11 @@ jobs:
         #wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
         version_go_appimage=$(wget -q -O - https://api.github.com/repos/probonopd/go-appimage/releases | grep "\"name.*appimagetool-.*-x86_64.AppImage\"" | head -n 1 | cut -d '-' -f2)
         echo "version_go_appimage: $version_go_appimage"
-
         wget -q "https://github.com/probonopd/go-appimage/releases/download/continuous/appimagetool-$version_go_appimage-x86_64.AppImage" -O appimagetool-x86_64.AppImage
         chmod +x appimagetool-x86_64.AppImage
 
     - name: Make AppImage
-      run:  |
+      run: |
         set -x
         pwd; ls -lah
         version=$(grep -o "balenaEtcher:.*" README.md | cut -d ' ' -f2)
@@ -87,13 +84,8 @@ jobs:
 
         fileName=$(ls balenaEtcher*.AppImage)
         echo "fileName: $fileName"
-
         md5sum "$fileName" > "${fileName}.md5"
         pwd; ls -lah
-
-    # Build - Errror: Resource not accessible by integration
-    # Change Settings -> Actions -> General -> Workflow Permissions to allow read and write:
-    # https://github.com/actions/first-interaction/issues/10#issuecomment-1506118886
 
     # https://github.com/marketplace/actions/upload-to-github-release
     - uses: xresloader/upload-to-github-release@main
