@@ -42,16 +42,12 @@ jobs:
         ./balena-etcher $@' > AppRun
         chmod +x AppRun
 
-        #mkdir usr/
-        #cd usr/
-
         wget https://github.com/balena-io/etcher/releases/download/v$version/balenaEtcher-linux-x64-$version.zip
         unzip balenaEtcher-linux-x64-$version.zip
         rm balenaEtcher-linux-x64-$version.zip
-        #mv balenaEtcher-linux-x64/ bin/
 
         pwd; ls -lah
-        cd ../ #../
+        cd ../
         pwd; ls -lah
 
         wget https://raw.githubusercontent.com/balena-io/etcher/refs/heads/master/assets/iconset/128x128.png -O balenaEtcher.AppDir/balenaEtcher.png
