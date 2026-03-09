@@ -34,14 +34,12 @@ jobs:
         Categories=Utility' > balenaEtcher.desktop
         chmod +x balenaEtcher.desktop
 
-        cat > AppRun << 'EOF'
-        #!/bin/bash
+        echo '#!/bin/bash
         HERE="$(dirname "$(readlink -f "${0}")")"
 
         cd /"$HERE"/usr/bin/
         echo -e "\n/"$HERE"/usr/bin/balena-etcher $@\n"
-        ./balena-etcher $@
-        EOF
+        ./balena-etcher $@' > AppRun
         chmod +x AppRun
 
         mkdir usr/
