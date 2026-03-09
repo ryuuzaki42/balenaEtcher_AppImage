@@ -23,22 +23,18 @@ jobs:
         echo "balenaEtcher version: $version"
 
         mkdir -p balenaEtcher.AppDir/
+        cd balenaEtcher.AppDir/
 
-        #cp balenaEtcher.desktop balenaEtcher.AppDir/
-
-        cat > balenaEtcher.AppDir/balenaEtcher.desktop << 'EOF'
-        [Desktop Entry]
+        echo '[Desktop Entry]
         Name=balenaEtcher
         Exec=balena-etcher
         Icon=balenaEtcher
         Terminal=false
         Type=Application
-        Categories=Utility;
-        EOF
+        Categories=Utility' > balenaEtcher.desktop
+        chmod +x balenaEtcher.desktop
 
-        chmod +x balenaEtcher.AppDir/balenaEtcher.desktop
-
-        cat > balenaEtcher.AppDir/AppRun << 'EOF'
+        cat > AppRun << 'EOF'
         #!/bin/bash
         HERE="$(dirname "$(readlink -f "${0}")")"
 
@@ -46,11 +42,10 @@ jobs:
         echo -e "\n/"$HERE"/usr/bin/balena-etcher $@\n"
         ./balena-etcher $@
         EOF
+        chmod +x AppRun
 
-        chmod +x balenaEtcher.AppDir/AppRun
-
-        mkdir -p balenaEtcher.AppDir/usr/
-        cd balenaEtcher.AppDir/usr/
+        mkdir usr/
+        cd usr/
 
         wget https://github.com/balena-io/etcher/releases/download/v$version/balenaEtcher-linux-x64-$version.zip
         unzip balenaEtcher-linux-x64-$version.zip
@@ -61,8 +56,8 @@ jobs:
         cd ../../
         pwd; ls -lah
 
-        wget https://github.com/balena-io/etcher/blob/master/assets/iconset/128x128.png -O balenaEtcher.AppDir/balenaEtcher.png
-        cp README.md balenaEtcher.AppDir
+        wget https://raw.githubusercontent.com/balena-io/etcher/refs/heads/master/assets/iconset/128x128.png -O balenaEtcher.AppDir/balenaEtcher.png
+        cp README.md balenaEtcher.AppDir/
 
     - name: Get appimagetool
       run: |
