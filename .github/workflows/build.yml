@@ -84,6 +84,5 @@ jobs:
           file: "balenaEtcher*.AppImage; balenaEtcher*.zsync ; balenaEtcher*.md5"
           #overwrite: true
           verbose: true
-          #tags: true
           draft: false
           default_release_name: "balenaEtcher V in AppImage"
