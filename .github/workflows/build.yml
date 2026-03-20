@@ -24,7 +24,7 @@ jobs:
         version=$(grep -o "balenaEtcher:.*" README.md | cut -d ' ' -f2)
         echo "balenaEtcher version: $version"
 
-        mkdir -p balenaEtcher.AppDir/
+        mkdir balenaEtcher.AppDir/
         cd balenaEtcher.AppDir/
 
         echo '[Desktop Entry]
@@ -39,9 +39,7 @@ jobs:
         echo '#!/bin/bash
         HERE="$(dirname "$(readlink -f "${0}")")"
 
-        cd /"$HERE"/balenaEtcher-linux-x64/
-        echo -e "\n/"$HERE"/usr/bin/balena-etcher $@\n"
-        ./balena-etcher $@' > AppRun
+        "$HERE"/balenaEtcher-linux-x64/balena-etcher $@' > AppRun
         chmod +x AppRun
 
         wget https://github.com/balena-io/etcher/releases/download/v$version/balenaEtcher-linux-x64-$version.zip
@@ -52,7 +50,7 @@ jobs:
         cd ../
         pwd; ls -lah
 
-        wget https://raw.githubusercontent.com/balena-io/etcher/refs/heads/master/assets/iconset/128x128.png -O balenaEtcher.AppDir/balenaEtcher.png
+        wget -q https://raw.githubusercontent.com/balena-io/etcher/refs/heads/master/assets/iconset/128x128.png -O balenaEtcher.AppDir/balenaEtcher.png
         cp README.md balenaEtcher.AppDir/
 
     - name: Get appimagetool
@@ -78,7 +76,6 @@ jobs:
         md5sum "$fileName" > "${fileName}.md5"
         pwd; ls -lah
 
-    # https://github.com/marketplace/actions/upload-to-github-release
     - uses: xresloader/upload-to-github-release@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
