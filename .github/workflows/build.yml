@@ -38,7 +38,6 @@ jobs:
 
         echo '#!/bin/bash
         HERE="$(dirname "$(readlink -f "${0}")")"
-
         "$HERE"/balenaEtcher-linux-x64/balena-etcher $@' > AppRun
         chmod +x AppRun
 
@@ -46,11 +45,10 @@ jobs:
         unzip balenaEtcher-linux-x64-$version.zip
         rm balenaEtcher-linux-x64-$version.zip
 
+        wget -q https://raw.githubusercontent.com/balena-io/etcher/refs/heads/master/assets/iconset/128x128.png -O balenaEtcher.png
+
         pwd; ls -lah
         cd ../
-        pwd; ls -lah
-
-        wget -q https://raw.githubusercontent.com/balena-io/etcher/refs/heads/master/assets/iconset/128x128.png -O balenaEtcher.AppDir/balenaEtcher.png
         cp README.md balenaEtcher.AppDir/
 
     - name: Get appimagetool
