@@ -1,7 +1,7 @@
 
 # balenaEtcher_AppImage
 
-Flash OS images to SD cards & USB drives, safely and easily.
+Flash OS images to SD cards & USB drives, safely and easily
 
 https://etcher.balena.io/
 
