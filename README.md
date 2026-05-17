@@ -6,7 +6,7 @@ Flash OS images to SD cards & USB drives, safely and easily
 https://etcher.balena.io/
 
 ## Repository: https://github.com/ryuuzaki42/balenaEtcher_AppImage
-    balenaEtcher: 2.1.4
+    balenaEtcher: 2.1.5
 
 ---
 https://etcher.balena.io/#download-etcher
